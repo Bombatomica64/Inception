@@ -9,7 +9,20 @@ services:
      MYSQL_DATABASE: WP
      MYSQL_USER: lollo
      MYSQL_PASSWORD: 123456
+    volumes:
+     - ./data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
     ports:
      - "3306:3306"
+
+  nginx:
+    image: nginx:latest
+    ports:
+     - "9000"
     
+volumes:
+  db_data:
 
