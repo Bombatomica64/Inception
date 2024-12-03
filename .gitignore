@@ -1,0 +1,18 @@
+.env
+
+# Ignore Docker volumes
+volumes/
+
+# Ignore Docker logs
+*.log
+
+# Ignore node_modules
+node_modules/
+
+# Ignore Python virtual environments
+venv/
+__pycache__/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db

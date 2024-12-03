@@ -1,7 +1,5 @@
 FROM debian:11
 
-RUN sudo apt-get update -y && sudo apt-get install mariadb
-
 RUN apt-get install -y php7.3-fpm \
     php7.3-common \
     php7.3-mysql \
