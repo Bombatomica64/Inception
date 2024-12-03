@@ -14,23 +14,23 @@ help:
 
 build:
 	@echo "Building the project"
-	@docker-compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) build
+	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) build
 
 up:
 	@echo "Starting the project"
-	@docker-compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) up -d
+	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) up -d
 
 down:
 	@echo "Stopping the project"
-	@docker-compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) down
+	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) down
 
 logs:
 	@echo "Showing the logs"
-	@docker-compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) logs -f
+	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) logs -f
 
 stop:
 	@echo "Stopping the project"
-	@docker-compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) stop
+	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) stop
 
 clean:
 	@docker system prune -f
