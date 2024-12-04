@@ -1,5 +1,5 @@
 PROJ_NAME=inception
-COMPOSE_FILE=./src/docker-compose.yml
+COMPOSE_FILE=srcs/docker-compose.yml
 
 all: help
 
@@ -14,24 +14,24 @@ help:
 
 build:
 	@echo "Building the project"
-	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) build
+	@docker-compose -p $(PROJ_NAME) -f $(COMPOSE_FILE) build
 
 up:
 	@echo "Starting the project"
-	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) up -d
+	@docker-compose -p $(PROJ_NAME) -f $(COMPOSE_FILE) up -d
 
 down:
 	@echo "Stopping the project"
-	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) down
+	@docker-compose -p $(PROJ_NAME) -f $(COMPOSE_FILE) down
 
 logs:
 	@echo "Showing the logs"
-	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) logs -f
+	@docker-compose -p $(PROJ_NAME) -f $(COMPOSE_FILE) logs
 
 stop:
 	@echo "Stopping the project"
-	@docker compose -f $(COMPOSE_FILE) -p $(PROJ_NAME) stop
+	@docker-compose -p $(PROJ_NAME) -f $(COMPOSE_FILE) stop
 
-clean:
+clean: down
 	@docker system prune -f
 	@docker volume prune -f
