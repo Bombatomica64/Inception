@@ -28,9 +28,9 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
-# PHP-FPM
-# RUN echo "listen = 9000" >> /etc/php/7.3/fpm/pool.d/www.conf && \
-#     echo "access.log = /var/log/$pool.access.log" >> /etc/php/7.3/fpm/pool.d/www.conf
+#PHP-FPM
+RUN echo "listen = 9000" >> /etc/php/7.4/fpm/pool.d/www.conf && \
+    echo "access.log = /var/log/$pool.access.log" >> /etc/php/7.4/fpm/pool.d/www.conf
 
 #WordPress dir
 RUN mkdir -p /var/www/wordpress && \

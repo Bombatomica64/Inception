@@ -1,3 +1,43 @@
+# Configuration file for MariaDB server
+
+# [mysqld] section contains options for the MariaDB server (mysqld)
+
+# User and file paths
+# user: The user under which the MariaDB server runs
+# pid-file: The file where the server's process ID is stored
+# socket: The socket file used for local connections
+# port: The port on which the server listens for TCP/IP connections
+# basedir: The base directory for the MariaDB installation
+# datadir: The directory where the database files are stored
+# tmpdir: The directory for temporary files
+# lc-messages-dir: The directory for language-specific error messages
+
+# Networking options
+# skip-name-resolve: Disable DNS lookups for client connections
+# skip-networking: Disable all networking (set to false to enable networking)
+# bind-address: The IP address to bind to (0.0.0.0 allows connections from any IP)
+
+# Memory and cache settings
+# key_buffer_size: Size of the buffer used for index blocks
+# max_allowed_packet: Maximum size of a packet or a generated/intermediate string
+# thread_stack: Stack size for each thread
+# thread_cache_size: Number of threads to keep in the cache for reuse
+# myisam_recover_options: Options for recovering MyISAM tables
+# query_cache_limit: Maximum size of individual query results that can be cached
+# query_cache_size: Total size of the query cache
+
+# Logging options
+# log_error: The file where error messages are logged
+
+# Binary log options
+# expire_logs_days: Number of days to retain binary logs
+# max_binlog_size: Maximum size of a binary log file
+
+# Character set and collation
+# character-set-server: Default character set for the server
+# collation-server: Default collation for the server
+
+
 [mysqld]
 
 user            = mysql

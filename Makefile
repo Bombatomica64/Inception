@@ -35,3 +35,6 @@ stop:
 clean: down
 	@docker system prune -f
 	@docker volume prune -f
+
+health:
+	@docker ps -a | grep $(PROJ_NAME) | awk '{print $$1}' | xargs docker inspect --format='{{.State.Health.Status}} {{.Name}}'
