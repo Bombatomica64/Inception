@@ -27,8 +27,6 @@ pid="$!"
 
 echo "pid: $pid"
 
-echo "Waiting for MariaDB to start"
-# Wait for MariaDB to start
 for i in {30..0}; do
     if mysqladmin ping --silent; then
         break
@@ -78,9 +76,8 @@ EOSQL
 
 echo "Stopping MariaDB server"
 
-kill "$pid"
+kill `cat /var/run/mysqld/mysqld.pid`
 wait "$pid"
 
 echo "Restarting MariaDB server"
-
-"$@"
+mysqld --user=mysql --datadir=/var/lib/mysql --pid-file=/var/run/mysqld/mysqld.pid
