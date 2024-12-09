@@ -96,10 +96,15 @@ services:
     container_name: static
     networks:
       - default
-    volumes:
-      - ~/data/wp:/var/www/html
     depends_on:
-      - nginx
+      nginx:
+        condition: service_healthy
+
+  # netdata:
+  #   build:
+  #     context: ./requirements/Bonus/Netdata
+  #     dockerfile: Dockerfile
+
 
 networks:
   default:
