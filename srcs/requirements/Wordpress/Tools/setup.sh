@@ -36,7 +36,23 @@ else
     echo "Theme 'dark-mode' is already installed and active."
 fi
 
-sleep 100
+#install redis-plugins
+if ! wp plugin is-installed redis-cache --path=$WP_PATH --allow-root; then
+	echo "Setting up Redis params..."
+	wp config set WP_REDIS_HOST redis --add --allow-root
+	wp config set WP_REDIS_PORT 6379 --add --allow-root
+	wp config set WP_CACHE true --add --allow-root
+
+	echo "Installing and activating plugin 'redis-cache'..."
+	wp plugin install --allow-root redis-cache --activate
+	wp redis enable
+	wp redis status
+	wp cache flush --allow-root
+else
+	echo "Plugin 'redis-cache' is already installed and active."
+fi
+
+wp plugin update --all --allow-root
 
 # Start PHP-FPM
 php-fpm7.4 -F

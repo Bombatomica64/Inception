@@ -3,15 +3,16 @@ services:
     build:
       context: ./requirements/MariaDB
       dockerfile: Dockerfile
+    container_name: mariadb
     networks:
       - default
     volumes:
       - ~/data/db:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      interval: 5s
+      timeout: 60s
+      retries: 5
     env_file:
       - .env
 
@@ -19,6 +20,7 @@ services:
     build:
       context: ./requirements/Wordpress
       dockerfile: Dockerfile
+    container_name: wordpress
     volumes:
       - ~/data/wp:/var/www/html
     networks:
@@ -46,6 +48,7 @@ services:
     build:
       context: ./requirements/Nginx
       dockerfile: Dockerfile
+    container_name: nginx
     ports:
       - "443:443"
     networks:
@@ -54,9 +57,22 @@ services:
       - wordpress
     volumes:
       - ~/data/wp:/var/www/html
+    env_file:
+      - .env
     
-volumes:
-  db_data:
+  redis:
+    build:
+      context: ./requirements/Bonus/Redis
+      dockerfile: Dockerfile
+    container_name: redis
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 60s
+      retries: 5
+
 
 networks:
   default:

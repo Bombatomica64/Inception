@@ -40,10 +40,10 @@ if [ "$i" = 0 ]; then
     exit 1
 fi
 
-if [ "$FIRST" -eq "0" ]; then
-    echo "Running mysql_upgrade"
-    mysql_upgrade -u root -p"${MYSQL_ROOT_PASSWORD}"
-fi
+# if [ "$FIRST" -eq "0" ]; then
+#     echo "Running mysql_upgrade"
+#     mysql_upgrade -u root -p"${MYSQL_ROOT_PASSWORD}"
+# fi
 
 # Database Setup
 if [ "$FIRST" -eq "1" ]; then
