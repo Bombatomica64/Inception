@@ -2,10 +2,6 @@
 
 set -e
 
-# Print environment variables
-echo "Printing environment variables:"
-env
-
 FIRST=1
 
 if [ ! -d /var/lib/mysql/mysql ]; then

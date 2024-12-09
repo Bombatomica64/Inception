@@ -54,11 +54,17 @@ services:
     networks:
       - default
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_healthy
     volumes:
       - ~/data/wp:/var/www/html
     env_file:
       - .env
+    healthcheck:
+      test: ["CMD", "nginx", "status"]
+      interval: 5s
+      timeout: 60s
+      retries: 5
     
   redis:
     build:
@@ -73,6 +79,25 @@ services:
       timeout: 60s
       retries: 5
 
+  adminer:
+    build:
+      context: ./requirements/Bonus/Adminer
+      dockerfile: Dockerfile
+    container_name: adminer
+    networks:
+      - default
+    volumes:
+      - ~/data/wp:/var/www/html
+
+  static:
+    build:
+      context: ./requirements/Bonus/Static
+      dockerfile: Dockerfile
+    container_name: static
+    networks:
+      - default
+    volumes:
+      - ~/data/wp:/var/www/html
 
 networks:
   default:

@@ -45,8 +45,8 @@ if ! wp plugin is-installed redis-cache --path=$WP_PATH --allow-root; then
 
 	echo "Installing and activating plugin 'redis-cache'..."
 	wp plugin install --allow-root redis-cache --activate
-	wp redis enable
-	wp redis status
+	wp redis enable --allow-root
+	wp redis status --allow-root
 	wp cache flush --allow-root
 else
 	echo "Plugin 'redis-cache' is already installed and active."

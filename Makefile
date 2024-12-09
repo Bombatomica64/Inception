@@ -22,7 +22,7 @@ up:
 
 down:
 	@echo "Stopping the project"
-	@docker compose -f $(COMPOSE_FILE) down
+	@docker compose -p $(PROJ_NAME) -f $(COMPOSE_FILE) down
 
 logs:
 	@echo "Showing the logs"
