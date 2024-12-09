@@ -98,6 +98,8 @@ services:
       - default
     volumes:
       - ~/data/wp:/var/www/html
+    depends_on:
+      - nginx
 
 networks:
   default:

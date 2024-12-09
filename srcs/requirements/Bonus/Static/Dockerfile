@@ -2,7 +2,9 @@ FROM debian:11
 
 RUN apt-get update -y && apt-get upgrade -y
 
-RUN apt-get install -y npm nodejs
-COPY /WebPage /var/www/html/WebPage
+COPY WebPage /WebPage
+COPY Tools/setup.sh /
+RUN chmod 777 /setup.sh
 
-CMD [ "echo", "WebPage is running" ]
+ENTRYPOINT [ "/setup.sh" ]
+CMD [ "ls" , "/var/www/html/WebPage" ]

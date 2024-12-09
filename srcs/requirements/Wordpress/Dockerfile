@@ -44,9 +44,9 @@ COPY Conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 #     echo "access.log = /var/log/$pool.access.log" >> /etc/php/7.4/fpm/pool.d/www.conf
 
 #WordPress dir
-RUN mkdir -p /var/www/html && \
-    chown -R www-data:www-data /var/www/html && \
-    chmod 777 /var/www/html
+# RUN mkdir -p /var/www/html && \
+#     chown -R 777 /var/www/html && \
+#     chmod 777 /var/www/html
 
 RUN mkdir -p /run/php/
 
