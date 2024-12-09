@@ -96,9 +96,6 @@ services:
     container_name: static
     networks:
       - default
-    depends_on:
-      nginx:
-        condition: service_healthy
 
   # netdata:
   #   build:
