@@ -13,7 +13,7 @@ if [ ! -f "$WP_PATH/wp-config.php" ]; then
     echo "Creating wp-config.php..."
     wp config create --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=mariadb --allow-root
     echo "Installing WordPress..."
-    wp core install --url=${DOMAIN} --title="LETSGOSKI" --admin_user=${ADMIN} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL} --allow-root
+    wp core install --url=lmicheli.42.fr --title="LETSGOSKI" --admin_user=${ADMIN} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL} --allow-root
 else
     echo "WordPress core already downloaded."
     echo "wp-config.php already exists."

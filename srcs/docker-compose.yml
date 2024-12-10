@@ -15,6 +15,7 @@ services:
       retries: 5
     env_file:
       - .env
+    restart: always
 
   wordpress:
     build:
@@ -36,6 +37,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 90s
+    restart: always
 
   nginx:
     build:
@@ -49,6 +51,8 @@ services:
     depends_on:
       wordpress:
         condition: service_healthy
+      static:
+        condition: service_started
     volumes:
       - ~/data/wp:/var/www/html
     env_file:
@@ -58,7 +62,8 @@ services:
       interval: 5s
       timeout: 60s
       retries: 5
-    
+    restart: always
+  
   redis:
     build:
       context: ./requirements/Bonus/Redis
@@ -71,6 +76,7 @@ services:
       interval: 5s
       timeout: 60s
       retries: 5
+    restart: always
 
   adminer:
     build:
@@ -81,20 +87,57 @@ services:
       - default
     volumes:
       - ~/data/wp:/var/www/html
+    restart: always
 
   static:
     build:
-      context: ./requirements/Bonus/static
+      context: ./requirements/Bonus/Static
       dockerfile: Dockerfile
     container_name: static
     networks:
       - default
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 5s
+      timeout: 60s
+      retries: 5
+    restart: always
 
-  # netdata:
-  #   build:
-  #     context: ./requirements/Bonus/Netdata
-  #     dockerfile: Dockerfile
+  netdata:
+    build:
+      context: ./requirements/Bonus/NetData
+      dockerfile: Dockerfile
+    container_name: netdata
+    networks:
+      - default
+    volumes:
+      - ~/data/wp:/var/lib/netdata/vol1
+      - ~/data/db:/var/lib/netdata/vol2
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - wordpress
+    restart: always
 
+  ftp:
+    build:
+      context: ./requirements/Bonus/Ftp
+      dockerfile: Dockerfile
+    container_name: ftp
+    ports:
+      - "21:21"
+      - "1998-2002:1998-2002"
+    volumes:
+      - ~/data/wp:/var/www/html
+    networks:
+      - default
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    env_file:
+      - .env
+    restart: always
 
 networks:
   default:

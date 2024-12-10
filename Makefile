@@ -16,7 +16,7 @@ build:
 	@echo "Building the project"
 	@docker compose -f $(COMPOSE_FILE) build
 
-up:
+up: build
 	@echo "Starting the project"
 	@docker compose -f $(COMPOSE_FILE) up -d
 
@@ -36,6 +36,10 @@ clean: down
 	@docker system prune -f
 	@docker volume prune -f
 	sudo rm -rf /home/$(USER)/data
+
+re: down up
+
+start: clean up
 
 health:
 	@docker ps -a | grep $(PROJ_NAME) | awk '{print $$1}' | xargs docker inspect --format='{{.State.Health.Status}} {{.Name}}'

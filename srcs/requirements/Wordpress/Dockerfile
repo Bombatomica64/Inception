@@ -54,6 +54,6 @@ COPY Tools/setup.sh /
 RUN chmod 777 /setup.sh
 WORKDIR /var/www/html/
 
-EXPOSE 9000
+EXPOSE 9000 21
 
 ENTRYPOINT ["sh", "/setup.sh"]
