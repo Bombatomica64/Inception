@@ -36,13 +36,6 @@ services:
       timeout: 5s
       retries: 3
       start_period: 90s
-    dns:
-      - 8.8.8.8
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -f http: //localhost:9000 || exit 1"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
 
   nginx:
     build:
@@ -91,7 +84,7 @@ services:
 
   static:
     build:
-      context: ./requirements/Bonus/Static
+      context: ./requirements/Bonus/static
       dockerfile: Dockerfile
     container_name: static
     networks:
