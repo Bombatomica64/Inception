@@ -42,4 +42,4 @@ re: down up
 start: clean up
 
 health:
-	@docker ps -a | grep $(PROJ_NAME) | awk '{print $$1}' | xargs docker inspect --format='{{.State.Health.Status}} {{.Name}}'
+	@dofrcker ps -a | grep $(PROJ_NAME) | awk '{print $$1}' | xargs docker inspect --format='{{.State.Health.Status}} {{.Name}}'
